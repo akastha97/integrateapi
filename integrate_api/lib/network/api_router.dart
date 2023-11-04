@@ -7,11 +7,11 @@ class ApiRouter {
     postId = id;
   }
 
-  static String get allEmployees => "$baseUrl/posts";
+  static String get allPosts => "$baseUrl/posts";
 
-  static String get singleEmployee => "$baseUrl/posts/$postId";
+  static String get singlePost => "$baseUrl/posts/$postId";
 
-  static String get createEmployee => "$baseUrl/posts";
+  static String get newPost => "$baseUrl/posts";
 
-  static String get updateEmployee => "$baseUrl/posts/$postId";
+  static String get updatePost => "$baseUrl/posts/$postId";
 }

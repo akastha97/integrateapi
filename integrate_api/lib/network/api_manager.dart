@@ -15,7 +15,7 @@ class ApiManager {
 
   Future<List<PostModel>> fetchPosts() async {
     try {
-      String url = ApiRouter.allEmployees;
+      String url = ApiRouter.allPosts;
       http.Response response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
@@ -25,6 +25,27 @@ class ApiManager {
         return result;
       } else {
         return Future.error(response.statusCode);
+      }
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<PostModel> addNewPost(Map<String, dynamic> inputData) async {
+    try {
+      String url = ApiRouter.newPost;
+      http.Response response = await http.post(
+        Uri.parse(url),
+        body: json.encode(inputData),
+        headers: {"Content-Type": "application/json"},
+      );
+
+      dynamic responseData = json.decode(response.body);
+      PostModel result = PostModel.fromJson(responseData);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return result;
+      } else {
+        throw Exception('Failed to add a new post: ${response.statusCode}');
       }
     } catch (e) {
       return Future.error(e);
